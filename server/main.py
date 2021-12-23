@@ -13,5 +13,4 @@ def loop_snippet(snippet_name: str):
 
 @app.get("/stop/")
 def stop():
-    print('howdy')
     star_controller.stop()
