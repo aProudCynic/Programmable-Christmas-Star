@@ -30,3 +30,11 @@ def random_outer_blink(star):
     leds = star.leds
     led = star.leds[randint(1, len(leds) - 1)]
     led.pulse(fade_in_time=1, fade_out_time=1, n=1, background=False)
+
+
+def slow_walk(star):
+    leds = star.leds
+    step_time = 1
+    for i in range(0, len(leds) - 1):
+        leds[i].blink(on_time=0.5, off_time=0.5, n=1)
+        sleep(step_time)
