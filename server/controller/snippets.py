@@ -1,3 +1,4 @@
+from random import randint
 from time import sleep
 
 
@@ -22,3 +23,9 @@ def explode(star):
 
 def all_on(star):
     star.on()
+
+
+def random_outer_blink(star):
+    leds = star.leds
+    led = star.leds[randint(1, len(leds) - 1)]
+    led.pulse(fade_in_time=1, fade_out_time=1, n=1, background=False)
