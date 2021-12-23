@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd ../src
+cd ../server
 uvicorn main:app --reload
