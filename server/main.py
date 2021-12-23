@@ -1,15 +1,17 @@
 from fastapi import FastAPI
 from controller.star_controller import StarController
-from service.explode import explode
+import controller.snippets as snippets
 
 app = FastAPI()
 
 star_controller = StarController()
 
-@app.get("/explode/")
-def initiate_explode():
-    star_controller.start_loop(explode)
+@app.get("/{snippet_name}/")
+def loop_snippet(snippet_name: str):
+    snippet = getattr(snippets, snippet_name)
+    star_controller.start_loop(snippet)
 
 @app.get("/stop/")
 def stop():
+    print('howdy')
     star_controller.stop()
