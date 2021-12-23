@@ -1,4 +1,4 @@
 #!/bin/bash
 
-apt-get install python3-blinkt
+cd ../server
 pip install -r requirements.txt
