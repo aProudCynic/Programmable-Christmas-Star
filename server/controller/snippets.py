@@ -19,3 +19,6 @@ def explode(star):
     sleep(step_time)
     star.off()
     sleep(step_time)
+
+def all_on(star):
+    star.on()
