@@ -1,4 +1,4 @@
-from star import Star
+from model.star import Star
 from time import sleep
 
 star = Star(pwm=True)

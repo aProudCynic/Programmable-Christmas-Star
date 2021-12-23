@@ -1,5 +1,5 @@
 from time import sleep
-from star import Star
+from model.star import Star
     
 step = 0.5
 count = 0

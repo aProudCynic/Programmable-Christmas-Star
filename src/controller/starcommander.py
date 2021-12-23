@@ -1,5 +1,5 @@
 from time import sleep
-from star import Star
+from model.star import Star
 
 star = Star(pwm=True)
 star.off()

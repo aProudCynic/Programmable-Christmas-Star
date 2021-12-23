@@ -1,4 +1,4 @@
-from star import Star
+from model.star import Star
 
 star = Star()
 

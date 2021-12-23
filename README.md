@@ -16,7 +16,7 @@ Inside there is a script called `star.py` which contains a [GPIO Zero](https://g
 To switch on the Star you can use:
 
 ```
-from star import Star
+from model.star import Star
 
 star = Star()
 

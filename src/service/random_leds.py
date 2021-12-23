@@ -1,4 +1,4 @@
-from star import Star
+from model.star import Star
 from gpiozero.tools import random_values
 from signal import pause
 
