@@ -1,5 +1,7 @@
 from random import randint
 from time import sleep
+from gpiozero.tools import random_values
+from signal import pause
 
 
 def explode(star):
@@ -72,3 +74,15 @@ def inner_pulse(star):
 
 def outer_pulse(star):
     star.outer.pulse()
+
+
+def twinkle(star):
+    for led in star.leds:
+        led.pulse()
+        sleep(.2)
+
+def in_out(star):
+    star.inner.on()
+    sleep(.5)
+    star.toggle()
+    sleep(.5)
