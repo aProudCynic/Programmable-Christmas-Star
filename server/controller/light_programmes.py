@@ -39,6 +39,7 @@ def slow_walk(star):
         leds[i].blink(on_time=0.5, off_time=0.5, n=1)
         sleep(step_time)
 
+
 def walking_line(star):
     leds = star.leds
     step_time = 1
@@ -56,14 +57,18 @@ def walking_line(star):
         sleep(step_time)
     star.off()
 
+
 def all_pulse(star):
     star.pulse()
+
 
 def all_blink(star):
     star.blink()
 
+
 def inner_pulse(star):
     star.inner.pulse()
+
 
 def outer_pulse(star):
     star.outer.pulse()
