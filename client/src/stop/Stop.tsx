@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SERVER_URL = 'http://127.0.0.1:8000';
+const SERVER_URL = 'http://smarthome.local:4000';
 const stop = () => fetch(`${SERVER_URL}/stop`, { method: 'POST'})
 
 function Stop() {
