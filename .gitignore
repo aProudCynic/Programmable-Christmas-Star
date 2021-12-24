@@ -24,4 +24,4 @@ yarn-error.log*
 __pycache__
 
 # custom
-scripts/deploy.sh
+scripts/deploy*.sh
