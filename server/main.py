@@ -1,9 +1,22 @@
 from fastapi import FastAPI
 from controller.star_controller import StarController
 import controller.light_programmes as light_programmes
+from fastapi.middleware.cors import CORSMiddleware
 from inspect import getmembers, isfunction
 
 app = FastAPI()
+
+origins = [
+    "*",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 star_controller = StarController()
 
