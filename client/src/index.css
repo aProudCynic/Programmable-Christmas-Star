@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+input[type="button"] {
+  background-color: green;
+  margin: 0.5rem;
+  /* height: 2rem; */
+  border-style: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  color: white;
+  font-weight: bold;
+}
+
+select {
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
