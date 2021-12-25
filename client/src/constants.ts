@@ -1,1 +1,1 @@
-export const SERVER_URL = 'http://smarthome.local:4000';
+export const SERVER_URL = 'http://192.168.0.247:4000';
