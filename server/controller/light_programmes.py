@@ -2,6 +2,7 @@ from random import randint
 from time import sleep
 from gpiozero.tools import random_values
 from signal import pause
+from random import getrandbits
 
 
 def explode(star):
@@ -86,3 +87,8 @@ def in_out(star):
     sleep(.5)
     star.toggle()
     sleep(.5)
+
+def blink_randomly(star):
+    for led in star.leds:
+        if bool(getrandbits(1)):
+            led.blink(on_time=0.1, off_time=0.1, n=1)
