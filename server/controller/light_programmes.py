@@ -69,11 +69,11 @@ def all_blink(star):
 
 
 def inner_pulse(star):
-    star.inner.pulse()
+    star.inner.blink()
 
 
 def outer_pulse(star):
-    star.outer.pulse()
+    star.outer.blink()
 
 
 def twinkle(star):
