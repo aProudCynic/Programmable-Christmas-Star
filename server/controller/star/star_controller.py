@@ -4,7 +4,7 @@ from model.star import Star
 from threading import Thread
 
 from controller.light_controller import LightController
-import controller.light_programmes as light_programmes
+import controller.star.light_programmes as light_programmes
 
 
 class StarController(LightController):
