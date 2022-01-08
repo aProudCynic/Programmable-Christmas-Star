@@ -14,11 +14,6 @@ class StarController(LightController):
         self.star = Star(pwm=True)
         self.on = False
         self.star.off()
-    
-    def start_loop(self, function) -> None:
-        self.on = True
-        self.thread = Thread(target=self._perform_loop, args=(function,))
-        self.thread.start()
 
     def stop_loop(self) -> None:
         if self.thread and self.thread.is_alive():
@@ -29,7 +24,7 @@ class StarController(LightController):
         function_tuples = getmembers(light_programmes, isfunction)
         return [function_tuple[0] for function_tuple in function_tuples]
 
-    def _perform_loop(self, function):
+    def perform_loop(self, function) -> None:
         while self.on:
             function(self.star)
             if not self.on:
