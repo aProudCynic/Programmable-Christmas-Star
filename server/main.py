@@ -18,16 +18,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-star_controller = StarController()
+light_controller = StarController()
 
 @app.post("/loop/{light_programme_name}")
 def loop_snippet(light_programme_name: str):
     snippet = getattr(light_programmes, light_programme_name)
-    star_controller.start_loop(snippet)
+    light_controller.start_loop(snippet)
 
 @app.post("/stop")
 def stop():
-    star_controller.stop()
+    light_controller.stop()
 
 @app.get("/light_programmes")
 def get_snippets():
