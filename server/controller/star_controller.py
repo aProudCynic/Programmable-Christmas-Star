@@ -1,7 +1,10 @@
+from inspect import getmembers, isfunction
+from typing import List
 from model.star import Star
 from threading import Thread
 
 from controller.light_controller import LightController
+import controller.light_programmes as light_programmes
 
 
 class StarController(LightController):
@@ -21,6 +24,10 @@ class StarController(LightController):
         if self.thread and self.thread.is_alive():
             self.on = False
             self.star.off()
+
+    def get_light_programmes(self) -> List[function]:
+        function_tuples = getmembers(light_programmes, isfunction)
+        return [function_tuple[0] for function_tuple in function_tuples]
 
     def _perform_loop(self, function):
         while self.on:

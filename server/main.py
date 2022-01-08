@@ -1,8 +1,6 @@
 from fastapi import FastAPI
 from controller.star_controller import StarController
-import controller.light_programmes as light_programmes
 from fastapi.middleware.cors import CORSMiddleware
-from inspect import getmembers, isfunction
 
 app = FastAPI()
 
@@ -34,5 +32,4 @@ def stop():
 
 @app.get("/light_programmes")
 def get_snippets():
-    function_tuples = getmembers(light_programmes, isfunction)
-    return [function_tuple[0] for function_tuple in function_tuples]
+    light_controller.get_light_programmes()
