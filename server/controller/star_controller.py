@@ -1,5 +1,5 @@
 from model.star import Star
-from threading import Semaphore, Thread
+from threading import Thread
 
 
 class StarController:
