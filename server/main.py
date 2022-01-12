@@ -32,4 +32,4 @@ def stop():
 
 @app.get("/light_programmes")
 def get_snippets():
-    light_controller.get_light_programmes()
+    return light_controller.get_light_programmes()
