@@ -28,7 +28,7 @@ def loop_light_programme(light_programme_name: str):
 
 @app.post("/stop")
 def stop_light_programme():
-    light_controller.stop()
+    light_controller.stop_loop()
 
 
 @app.get("/light_programmes")
