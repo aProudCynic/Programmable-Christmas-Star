@@ -25,6 +25,9 @@ class LightController:
     def get_light_programmes(self) -> List:
         pass
 
+    def get_light_programme_by(self, light_programme_name) -> List:
+        pass
+
     def apply_light_programme(self, function) -> None:
         pass
 

@@ -24,3 +24,7 @@ class StarController(LightController):
 
     def apply_light_programme(self, function):
         function(self.star)
+
+    # TODO hoist
+    def get_light_programme_by(self, light_programme_name) -> List:
+        return getattr(light_programmes, light_programme_name)

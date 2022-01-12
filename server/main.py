@@ -22,8 +22,8 @@ light_controller = BlinktController()
 
 @app.post("/loop/{light_programme_name}")
 def loop_light_programme(light_programme_name: str):
-    snippet = getattr(light_programmes, light_programme_name)
-    light_controller.start_loop(snippet)
+    light_programme = light_controller.get_light_programme_by(light_programme_name)
+    light_controller.start_loop(light_programme)
 
 
 @app.post("/stop")

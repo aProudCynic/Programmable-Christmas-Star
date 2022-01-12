@@ -13,3 +13,7 @@ class BlinktController(LightController):
 
     def apply_light_programme(self, function):
         function()
+
+    # TODO hoist
+    def get_light_programme_by(self, light_programme_name):
+        return getattr(light_programmes, light_programme_name)
