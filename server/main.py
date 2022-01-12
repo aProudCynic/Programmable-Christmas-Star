@@ -1,6 +1,7 @@
 from fastapi import FastAPI
-from controller.star_controller import StarController
 from fastapi.middleware.cors import CORSMiddleware
+
+from controller.blinkt.blinkt_controller import BlinktController
 
 app = FastAPI()
 
@@ -16,7 +17,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-light_controller = StarController()
+light_controller = BlinktController()
 
 
 @app.post("/loop/{light_programme_name}")
