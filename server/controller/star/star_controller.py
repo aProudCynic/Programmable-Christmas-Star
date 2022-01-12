@@ -18,7 +18,7 @@ class StarController(LightController):
         super(StarController, self).stop_loop()
         self.star.off()
 
-    def get_light_programmes(self) -> List[function]:
+    def get_light_programmes(self):
         function_tuples = getmembers(light_programmes, isfunction)
         return [function_tuple[0] for function_tuple in function_tuples]
 
