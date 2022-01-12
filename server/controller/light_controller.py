@@ -14,7 +14,7 @@ class LightController:
 
     def perform_loop(self, function) -> None:
         while self.on:
-            function(self.star)
+            self.apply_light_programme(function)
             if not self.on:
                 break
 
