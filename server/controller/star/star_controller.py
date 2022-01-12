@@ -9,23 +9,18 @@ import controller.star.light_programmes as light_programmes
 
 class StarController(LightController):
     
-    def __init__(self) -> None:
+    def __init__(self):
         super(StarController, self).__init__()
         self.star = Star(pwm=True)
-        self.on = False
         self.star.off()
 
-    def stop_loop(self) -> None:
-        if self.thread and self.thread.is_alive():
-            self.on = False
-            self.star.off()
+    def stop_loop(self):
+        super(StarController, self).stop_loop()
+        self.star.off()
 
     def get_light_programmes(self) -> List[function]:
         function_tuples = getmembers(light_programmes, isfunction)
         return [function_tuple[0] for function_tuple in function_tuples]
 
-    def perform_loop(self, function) -> None:
-        while self.on:
-            function(self.star)
-            if not self.on:
-                break
+    def apply_light_programme(self, function):
+        function(self.star)

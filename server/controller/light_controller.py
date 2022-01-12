@@ -4,17 +4,27 @@ from typing import List
 
 class LightController:
 
+    def __init__(self) -> None:
+        self.on = False
+
     def start_loop(self, function) -> None:
         self.on = True
         self.thread = Thread(target=self.perform_loop, args=(function,))
         self.thread.start()
 
+    def perform_loop(self, function) -> None:
+        while self.on:
+            function(self.star)
+            if not self.on:
+                break
 
     def stop_loop(self) -> None:
+        if self.thread and self.thread.is_alive():
+            self.on = False
+
+    def get_light_programmes(self) -> List:
         pass
 
-    def get_light_programmes(self) -> List[function]:
+    def apply_light_programme(self, function) -> None:
         pass
 
-    def perform_loop(self, function) -> None:
-        pass
