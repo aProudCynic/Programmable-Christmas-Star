@@ -8,6 +8,7 @@ from controller.blinkt.common import shut_down_all_pixels
 class BlinktController(LightController):
 
     def get_light_programmes(self):
+        # TODO exclude imported functions
         function_tuples = getmembers(light_programmes, isfunction)
         print([function_tuple[0] for function_tuple in function_tuples])
         return [function_tuple[0] for function_tuple in function_tuples]
