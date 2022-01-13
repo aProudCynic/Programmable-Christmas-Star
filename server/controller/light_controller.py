@@ -1,5 +1,5 @@
 from inspect import getmembers, isfunction
-from threading import Thread
+from multiprocessing import Process
 from typing import List
 
 
@@ -10,8 +10,8 @@ class LightController:
 
     def start_loop(self, function) -> None:
         self.on = True
-        self.thread = Thread(target=self.perform_loop, args=(function,))
-        self.thread.start()
+        self.process = Process(target=self.perform_loop, args=(function,))
+        self.process.start()
 
     def perform_loop(self, function) -> None:
         while self.on:
@@ -20,8 +20,8 @@ class LightController:
                 break
 
     def stop_loop(self) -> None:
-        if self.thread and self.thread.is_alive():
-            self.on = False
+        if self.process and self.process.is_alive():
+            self.process.terminate()
 
     def get_light_programmes(self):
         return self.__not_imported_function_names_from(
