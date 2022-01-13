@@ -17,6 +17,9 @@ function Select() {
         request.then(
             result => result.json().then(
                 fetchedLightProgrammes => {
+                    fetchedLightProgrammes.forEach((element: any[]) => {
+                        console.log(element)
+                    });
                     setLightProgrammes(fetchedLightProgrammes)
                     setSelectedLightProgramme(fetchedLightProgrammes[0])
                 }
@@ -41,6 +44,9 @@ function Select() {
             <select name="cars" id="cars" onChange={handleChange} disabled={startedContext.isStarted}>
                 {lightProgrammes.map(lightProgramme => <option value={lightProgramme.name}>{lightProgramme.name}</option>)}
             </select>
+            { selectedLightProgramme && selectedLightProgramme.parameters ? selectedLightProgramme.parameters.map(
+                parameter => <p><label htmlFor={parameter}>{parameter}</label> <input type="text" id={parameter} name={parameter} defaultValue="0"></input></p>
+            ) : null }
             <input type="button" value="Loop" onClick={loopLightProgramme} disabled={startedContext.isStarted}/>
         </div>
     );
