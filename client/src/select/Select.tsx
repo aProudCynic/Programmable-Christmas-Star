@@ -2,11 +2,16 @@ import React, { useContext, useEffect, useState } from 'react';
 import { SERVER_URL } from '../constants';
 import StartedContext from '../store/started-context';
 
+interface LightProgramme {
+    name: string;
+    parameters: string[];
+}
+
 function Select() {
 
     const startedContext = useContext(StartedContext);
 
-    const [lightProgrammes, setLightProgrammes] = useState([]);
+    const [lightProgrammes, setLightProgrammes] = useState<LightProgramme[]>([]);    
     useEffect(() => {
         const request = fetch(`${SERVER_URL}/light_programmes`);
         request.then(
@@ -19,19 +24,22 @@ function Select() {
         )
     }, []);
 
-    const [selectedLightProgramme, setSelectedLightProgramme] = useState(null);
-    const handleChange = (event: any) => setSelectedLightProgramme(event.target.value);
+    const [selectedLightProgramme, setSelectedLightProgramme] = useState<LightProgramme | undefined>(undefined);
+    const handleChange = (event: any) => setSelectedLightProgramme(lightProgrammes.find(lightProgramme => lightProgramme.name === event.target.value));
+    
     const loopLightProgramme = async () => {
-        const result = await fetch(`${SERVER_URL}/loop/${selectedLightProgramme}`, { method: 'POST' });
-        if (result.ok) {
-            startedContext.flipStarted();
+        if (selectedLightProgramme) {
+            const result = await fetch(`${SERVER_URL}/loop/${selectedLightProgramme.name}`, { method: 'POST' });
+            if (result.ok) {
+                startedContext.flipStarted();
+            }
         }
     };
 
     return (
         <div className="Select">
             <select name="cars" id="cars" onChange={handleChange} disabled={startedContext.isStarted}>
-                {lightProgrammes.map(lightProgramme => <option value={lightProgramme}>{lightProgramme}</option>)}
+                {lightProgrammes.map(lightProgramme => <option value={lightProgramme.name}>{lightProgramme.name}</option>)}
             </select>
             <input type="button" value="Loop" onClick={loopLightProgramme} disabled={startedContext.isStarted}/>
         </div>

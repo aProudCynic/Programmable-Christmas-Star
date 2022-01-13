@@ -35,8 +35,7 @@ def set_all_pixels_to_random_color():
         red, green, blue = generate_random_colour()
         set_pixel(i, red, green, blue)
 
-def walk_through_pixels_with(colour):
-    red, green, blue = colour
+def walk_through_pixels_with(red, green, blue):
     while (True):
         for i in range(NUMBER_OF_PIXELS):
             clear()
