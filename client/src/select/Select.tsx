@@ -41,7 +41,7 @@ function Select() {
 
     return (
         <div className="Select">
-            <select name="cars" id="cars" onChange={handleChange} disabled={startedContext.isStarted}>
+            <select name="ligthProgramme" id="ligthProgramme" onChange={handleChange} disabled={startedContext.isStarted}>
                 {lightProgrammes.map(lightProgramme => <option value={lightProgramme.name}>{lightProgramme.name}</option>)}
             </select>
             { selectedLightProgramme && selectedLightProgramme.parameters ? selectedLightProgramme.parameters.map(
