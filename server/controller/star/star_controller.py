@@ -18,13 +18,8 @@ class StarController(LightController):
         super(StarController, self).stop_loop()
         self.star.off()
 
-    def get_light_programmes(self):
-        function_tuples = getmembers(light_programmes, isfunction)
-        return [function_tuple[0] for function_tuple in function_tuples]
+    def get_light_programme_module(self):
+        return light_programmes
 
     def apply_light_programme(self, function):
         function(self.star)
-
-    # TODO hoist
-    def get_light_programme_by(self, light_programme_name) -> List:
-        return getattr(light_programmes, light_programme_name)
