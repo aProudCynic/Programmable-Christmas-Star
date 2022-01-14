@@ -26,3 +26,4 @@ __pycache__
 
 # custom
 scripts/deploy*.sh
+scripts/ssh*.sh
