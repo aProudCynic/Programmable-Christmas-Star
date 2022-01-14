@@ -39,7 +39,6 @@ class LightController:
 
     def __not_imported_functions_from(self, module):
         function_tuples = getmembers(module, isfunction)
-        print(function_tuples)
         # this could be – as originally it was – a list comprehension, however it had become a bit incomprehensible
         result = []
         for function_data in function_tuples:
@@ -50,5 +49,4 @@ class LightController:
         return result
 
     def __is_not_imported(self, function_data, module):
-        print(function_data[0], function_data[1].__module__ == module.__name__)
         return function_data[1].__module__ == module.__name__
