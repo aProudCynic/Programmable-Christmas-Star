@@ -34,6 +34,7 @@ async def loop_light_programme(light_programme_name: str, request: Request):
     try:
         parameters = await request.json()
     except JSONDecodeError as json_error:
+        logger.debug(f'Setting parameters because request body cannot be processed: {json_error}')
         parameters = None
     light_controller.start_loop(light_programme, parameters)
 
