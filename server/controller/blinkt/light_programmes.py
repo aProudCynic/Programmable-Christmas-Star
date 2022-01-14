@@ -11,5 +11,5 @@ def blink_random_colour():
     show()
     sleep(0.05)
 
-def walk_through_pixels(red, green, blue):
-    walk_through_pixels_with(red, green, blue)
+def walk_through_pixels(color):
+    walk_through_pixels_with(color['red'], color['green'], color['blue'])
