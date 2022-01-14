@@ -8,14 +8,14 @@ class LightController:
     def __init__(self) -> None:
         self.on = False
 
-    def start_loop(self, function) -> None:
+    def start_loop(self, function, parameters) -> None:
         self.on = True
-        self.process = Process(target=self.perform_loop, args=(function,))
+        self.process = Process(target=self.perform_loop, args=(function, parameters))
         self.process.start()
 
-    def perform_loop(self, function) -> None:
+    def perform_loop(self, function, parameters) -> None:
         while self.on:
-            self.apply_light_programme(function)
+            self.apply_light_programme(function, parameters)
             if not self.on:
                 break
 
@@ -34,7 +34,7 @@ class LightController:
     def get_light_programme_module():
         pass
 
-    def apply_light_programme(self, function) -> None:
+    def apply_light_programme(self, function, parameters) -> None:
         pass
 
     def __not_imported_functions_from(self, module):

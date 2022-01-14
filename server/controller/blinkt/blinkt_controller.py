@@ -4,8 +4,8 @@ from controller.blinkt.common import shut_down_all_pixels
 
 class BlinktController(LightController):
 
-    def apply_light_programme(self, function):
-        function()
+    def apply_light_programme(self, function, parameters):
+        function(**parameters)
 
     def stop_loop(self):
         super(BlinktController, self).stop_loop()

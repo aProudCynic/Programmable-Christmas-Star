@@ -21,5 +21,5 @@ class StarController(LightController):
     def get_light_programme_module(self):
         return light_programmes
 
-    def apply_light_programme(self, function):
-        function(self.star)
+    def apply_light_programme(self, function, parameters):
+        function(self.star, **parameters)
