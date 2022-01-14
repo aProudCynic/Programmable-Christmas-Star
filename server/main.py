@@ -5,6 +5,7 @@ from fastapi import (
 from fastapi.middleware.cors import CORSMiddleware
 
 from json.decoder import JSONDecodeError
+import logging
 
 from controller.blinkt.blinkt_controller import BlinktController
 
@@ -24,6 +25,8 @@ app.add_middleware(
 
 light_controller = BlinktController()
 
+logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
+logger = logging.getLogger(__name__)
 
 @app.post("/loop/{light_programme_name}")
 async def loop_light_programme(light_programme_name: str, request: Request):
