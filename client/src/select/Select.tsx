@@ -8,12 +8,12 @@ class Colour {
     blue: number;
 
     constructor(hexCode?: string) {
-        if(!hexCode) {
+        if (!hexCode) {
             this.red = 0;
             this.green = 0;
-            this.blue = 0;  
+            this.blue = 0;
         } else {
-            if(!hexCode.match(/#[a-f0-9]{6}/)) {
+            if (!hexCode.match(/#[a-f0-9]{6}/)) {
                 throw new Error(`Hex code is invalid: ${hexCode}`)
             }
             this.red = parseInt(hexCode.slice(1, 3), 16);
@@ -22,8 +22,6 @@ class Colour {
         }
     }
 }
-
-
 
 interface LightProgramme {
     name: string;
@@ -39,7 +37,7 @@ function Select() {
 
     const startedContext = useContext(StartedContext);
 
-    const [lightProgrammes, setLightProgrammes] = useState<LightProgramme[]>([]);    
+    const [lightProgrammes, setLightProgrammes] = useState<LightProgramme[]>([]);
     const [selectedLightProgramme, setSelectedLightProgramme] = useState<LightProgramme | undefined>(undefined);
     const [parameters, setParameters] = useState<Record<string, string | number | Colour> | undefined>(undefined);
 
@@ -61,7 +59,7 @@ function Select() {
     }, []);
 
     const getDefaultValueFor = (type: string) => {
-        switch(type) {
+        switch (type) {
             case 'str':
                 return '';
             case 'int':
@@ -78,7 +76,7 @@ function Select() {
             resetParametersByDefaultsFor(selectedProgramme);
         };
     }
-    
+
     const loopLightProgramme = async () => {
         if (selectedLightProgramme) {
             const result = await fetch(`${SERVER_URL}/loop/${selectedLightProgramme.name}`, { method: 'POST' });
@@ -91,9 +89,8 @@ function Select() {
     const handleColorParameterChange = (event: any) => {
         const newColour = new Colour(event.target.value);
         const parameterName = event.target.name;
-        const newParameters = {...parameters};
+        const newParameters = { ...parameters };
         newParameters[parameterName] = newColour;
-        console.log(newParameters);
         setParameters(newParameters);
     }
 
@@ -106,13 +103,12 @@ function Select() {
     }
 
     const mapParameterDescriptorToHtmlElement = (parameter: ParameterDescriptor) => {
-        switch(parameter.type) {
+        switch (parameter.type) {
             case 'str':
                 return <p><label htmlFor={parameter.name}>{parameter.name}</label> <input type="text" id={parameter.name} name={parameter.name}></input></p>
             case 'Colour':
                 return <p><label htmlFor={parameter.name}>{parameter.name}</label> <input type="color" id={parameter.name} name={parameter.name} onChange={handleColorParameterChange}></input></p>
         }
-        
     }
 
     return (
@@ -120,10 +116,10 @@ function Select() {
             <select name="ligthProgramme" id="ligthProgramme" onChange={handleChange} disabled={startedContext.isStarted}>
                 {lightProgrammes.map(lightProgramme => <option value={lightProgramme.name}>{lightProgramme.name}</option>)}
             </select>
-            { selectedLightProgramme && selectedLightProgramme.parameters ? selectedLightProgramme.parameters.map(
+            {selectedLightProgramme && selectedLightProgramme.parameters ? selectedLightProgramme.parameters.map(
                 parameter => mapParameterDescriptorToHtmlElement(parameter)
-            ) : null }
-            <input type="button" value="Loop" onClick={loopLightProgramme} disabled={startedContext.isStarted}/>
+            ) : null}
+            <input type="button" value="Loop" onClick={loopLightProgramme} disabled={startedContext.isStarted} />
         </div>
     );
 }
