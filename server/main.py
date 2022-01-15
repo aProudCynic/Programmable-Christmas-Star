@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from json.decoder import JSONDecodeError
+from inspect import signature
 import logging
 
 from controller.blinkt.blinkt_controller import BlinktController
@@ -39,4 +39,17 @@ def stop_light_programme():
 
 @app.get("/light_programmes")
 def get_light_programmes():
-    return light_controller.get_light_programmes()
+    return __extract_light_programmes()
+
+def __extract_light_programmes():
+    result = []
+    for function in (
+        start_walk_through_pixels,
+    ):
+        function_name = function.__name__
+        function_signature = signature(function)
+        function_parameters = function_signature.parameters.values()
+        function_parameter_data = [{'name': param.name, 'type': param.annotation.__name__} for param in function_parameters]
+        result.append({'name': function_name, 'parameters': function_parameter_data})
+    print(result)
+    return result
