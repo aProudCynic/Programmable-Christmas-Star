@@ -5,8 +5,8 @@ from inspect import signature
 import logging
 
 from controller.blinkt.blinkt_controller import BlinktController
-from model.colour import Colour
 from controller.blinkt.light_programmes import perform_walk_through_pixels
+from model.walk_through_pixels_parameters import WalkThroughPixelsParameters
 
 app = FastAPI()
 
@@ -27,8 +27,8 @@ light_controller = BlinktController()
 logger = logging.getLogger(__name__)
 
 @app.post("/start/walk_through_pixels")
-async def walk_through_pixels(colour: Colour):
-    light_controller.start_loop(perform_walk_through_pixels, colour)
+async def walk_through_pixels(parameters: WalkThroughPixelsParameters):
+    light_controller.start_loop(perform_walk_through_pixels, *vars(parameters).values())
 
 
 @app.post("/stop")
@@ -41,14 +41,26 @@ def get_light_programmes():
     return __extract_light_programmes()
 
 def __extract_light_programmes():
-    result = []
     for function in (
         walk_through_pixels,
     ):
+        result = []
         function_name = function.__name__
         function_signature = signature(function)
+        # TODO generalise, this assumes that the light programmes have only body parameters
         function_parameters = function_signature.parameters.values()
-        function_parameter_data = [{'name': param.name, 'type': param.annotation.__name__} for param in function_parameters]
-        result.append({'name': function_name, 'parameters': function_parameter_data})
-    print(result)
-    return result
+        for param in function_parameters:
+            parameter_class_name = param.annotation.__name__
+            parameter_class = globals()[parameter_class_name]
+            parameter_vars = vars(parameter_class)
+            parameter_instance_variables = parameter_vars['__fields__']
+            parameter_data = []
+            for parameter_instance_variable in parameter_instance_variables:
+                # this travesty is required because Pydantic ModelField doesn't even have __dict__
+                key_value_pairs = str(parameter_instance_variables[parameter_instance_variable]).split()
+                parameter_name = key_value_pairs[0][len("name='"):-1]
+                parameter_type = key_value_pairs[1][len("type="):]
+                parameter_data.append({'name': parameter_name, 'type': parameter_type})
+            result.append({'name': function_name, 'parameters': parameter_data})
+        print(result)
+        return result

@@ -84,8 +84,7 @@ function Select() {
                 const result = await fetch(
                     `${SERVER_URL}/start/${selectedLightProgramme.name}`, {
                         method: 'POST',
-                        // TODO fix
-                        body: JSON.stringify(parameters?.colour), // JSON.stringify(parameters),
+                        body: JSON.stringify(parameters),
                         headers: {
                             'Content-Type': 'application/json'
                         },                    
