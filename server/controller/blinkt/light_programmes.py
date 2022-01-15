@@ -7,7 +7,7 @@ from controller.blinkt.common import (
 )
 from model.colour import Colour
 
-def blink_random_colour():
+def perform_blink_random_colour():
     set_all_pixels_to_random_color()
     show()
     sleep(0.05)

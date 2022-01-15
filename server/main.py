@@ -5,7 +5,10 @@ from inspect import signature
 import logging
 
 from controller.blinkt.blinkt_controller import BlinktController
-from controller.blinkt.light_programmes import perform_walk_through_pixels
+from controller.blinkt.light_programmes import (
+    perform_walk_through_pixels,
+    perform_blink_random_colour,
+)
 from model.walk_through_pixels_parameters import WalkThroughPixelsParameters
 
 app = FastAPI()
@@ -30,20 +33,24 @@ logger = logging.getLogger(__name__)
 async def walk_through_pixels(parameters: WalkThroughPixelsParameters):
     light_controller.start_loop(perform_walk_through_pixels, *vars(parameters).values())
 
+@app.post("/start/blink_random_colour")
+async def blink_random_colour():
+    light_controller.start_loop(perform_blink_random_colour, None)
 
 @app.post("/stop")
 def stop_light_programme():
     light_controller.stop_loop()
-
 
 @app.get("/light_programmes")
 def get_light_programmes():
     return __extract_light_programmes()
 
 def __extract_light_programmes():
-    for function in (
+    light_programmes = [
         walk_through_pixels,
-    ):
+        blink_random_colour,
+    ]
+    for function in light_programmes:
         result = []
         parameter_data = []
         function_name = function.__name__
