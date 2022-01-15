@@ -1,13 +1,12 @@
-from fastapi import (
-    FastAPI,
-    Request,
-)
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from json.decoder import JSONDecodeError
 import logging
 
 from controller.blinkt.blinkt_controller import BlinktController
+from model.colour import Colour
+from controller.blinkt.light_programmes import walk_through_pixels
 
 app = FastAPI()
 
