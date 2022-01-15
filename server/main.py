@@ -28,15 +28,9 @@ light_controller = BlinktController()
 logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
 logger = logging.getLogger(__name__)
 
-@app.post("/loop/{light_programme_name}")
-async def loop_light_programme(light_programme_name: str, request: Request):
-    light_programme = light_controller.get_light_programme_by(light_programme_name)
-    try:
-        parameters = await request.json()
-    except JSONDecodeError as json_error:
-        logger.debug(f'Setting parameters because request body cannot be processed: {json_error}')
-        parameters = None
-    light_controller.start_loop(light_programme, parameters)
+@app.post("/start/walk_through_pixels")
+async def start_walk_through_pixels(colour: Colour):
+    light_controller.start_loop(walk_through_pixels, colour)
 
 
 @app.post("/stop")
