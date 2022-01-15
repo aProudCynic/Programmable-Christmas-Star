@@ -79,9 +79,21 @@ function Select() {
 
     const loopLightProgramme = async () => {
         if (selectedLightProgramme) {
-            const result = await fetch(`${SERVER_URL}/loop/${selectedLightProgramme.name}`, { method: 'POST' });
-            if (result.ok) {
-                startedContext.flipStarted();
+            if (parameters) {
+                console.log(parameters, JSON.stringify(Object.values(parameters)));
+                const result = await fetch(
+                    `${SERVER_URL}/start/${selectedLightProgramme.name}`, {
+                        method: 'POST',
+                        // TODO fix
+                        body: JSON.stringify(parameters?.colour), // JSON.stringify(parameters),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },                    
+                    }
+                );
+                if (result.ok) {
+                    startedContext.flipStarted();
+                }
             }
         }
     };
