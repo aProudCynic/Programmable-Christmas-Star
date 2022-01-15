@@ -12,6 +12,8 @@ function Select() {
     const startedContext = useContext(StartedContext);
 
     const [lightProgrammes, setLightProgrammes] = useState<LightProgramme[]>([]);    
+    const [selectedLightProgramme, setSelectedLightProgramme] = useState<LightProgramme | undefined>(undefined);
+    
     useEffect(() => {
         const request = fetch(`${SERVER_URL}/light_programmes`);
         request.then(
