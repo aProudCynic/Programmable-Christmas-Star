@@ -45,6 +45,7 @@ def __extract_light_programmes():
         walk_through_pixels,
     ):
         result = []
+        parameter_data = []
         function_name = function.__name__
         function_signature = signature(function)
         # TODO generalise, this assumes that the light programmes have only body parameters
@@ -54,13 +55,11 @@ def __extract_light_programmes():
             parameter_class = globals()[parameter_class_name]
             parameter_vars = vars(parameter_class)
             parameter_instance_variables = parameter_vars['__fields__']
-            parameter_data = []
             for parameter_instance_variable in parameter_instance_variables:
                 # this travesty is required because Pydantic ModelField doesn't even have __dict__
                 key_value_pairs = str(parameter_instance_variables[parameter_instance_variable]).split()
                 parameter_name = key_value_pairs[0][len("name='"):-1]
                 parameter_type = key_value_pairs[1][len("type="):]
                 parameter_data.append({'name': parameter_name, 'type': parameter_type})
-            result.append({'name': function_name, 'parameters': parameter_data})
-        print(result)
-        return result
+        result.append({'name': function_name, 'parameters': parameter_data})
+    return result
