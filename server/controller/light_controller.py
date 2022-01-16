@@ -5,19 +5,13 @@ from typing import List
 
 class LightController:
 
-    def __init__(self) -> None:
-        self.on = False
-
     def start_loop(self, function, parameters) -> None:
-        self.on = True
         self.process = Process(target=self.perform_loop, args=(function, parameters))
         self.process.start()
 
     def perform_loop(self, function, parameters) -> None:
-        while self.on:
+        while True:
             self.apply_light_programme(function, parameters)
-            if not self.on:
-                break
 
     def stop_loop(self) -> None:
         if self.process and self.process.is_alive():
