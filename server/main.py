@@ -54,6 +54,10 @@ def stop_light_programme():
 def get_light_programmes():
     return __extract_light_programmes()
 
+@app.get("/is_on")
+def is_on():
+    return light_controller.is_on()
+
 def __extract_light_programmes():
     light_programmes = [
         walk_through_pixels,
