@@ -60,8 +60,8 @@ def __extract_light_programmes():
         blink_random_colour,
         radiate_colour
     ]
+    result = []
     for function in light_programmes:
-        result = []
         parameter_data = []
         function_name = function.__name__
         function_signature = signature(function)
