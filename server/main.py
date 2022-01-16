@@ -8,8 +8,12 @@ from controller.blinkt.blinkt_controller import BlinktController
 from controller.blinkt.light_programmes import (
     perform_walk_through_pixels,
     perform_blink_random_colour,
+    perform_radiate_colour,
 )
-from model.walk_through_pixels_parameters import WalkThroughPixelsParameters
+from model.request_parameters import (
+    WalkThroughPixelsParameters,
+    RadiateColourParameters,
+)
 
 app = FastAPI()
 
@@ -37,6 +41,11 @@ async def walk_through_pixels(parameters: WalkThroughPixelsParameters):
 async def blink_random_colour():
     light_controller.start_loop(perform_blink_random_colour, None)
 
+@app.post("/start/radiate_colour")
+async def radiate_colour(parameters: RadiateColourParameters):
+    light_controller.start_loop(perform_radiate_colour, *vars(parameters).values())
+
+
 @app.post("/stop")
 def stop_light_programme():
     light_controller.stop_loop()
@@ -49,6 +58,7 @@ def __extract_light_programmes():
     light_programmes = [
         walk_through_pixels,
         blink_random_colour,
+        radiate_colour
     ]
     for function in light_programmes:
         result = []
