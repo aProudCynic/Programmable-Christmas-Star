@@ -7,3 +7,4 @@ class WalkThroughPixelsParameters(BaseModel):
 
 class RadiateColourParameters(BaseModel):
     colour: Colour
+    granularity: int

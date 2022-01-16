@@ -105,6 +105,14 @@ function Select() {
         setParameters(newParameters);
     }
 
+    const handleNumberParameterChange = (event: any) => {
+        const newNumber = event.target.value;
+        const parameterName = event.target.name;
+        const newParameters = { ...parameters };
+        newParameters[parameterName] = newNumber;
+        setParameters(newParameters);
+    }
+
     function resetParametersByDefaultsFor(programme: LightProgramme) {
         const newParameters: any = {};
         programme.parameters.forEach(
@@ -117,6 +125,8 @@ function Select() {
         switch (parameter.type) {
             case 'str':
                 return <p><label htmlFor={parameter.name}>{parameter.name}</label> <input type="text" id={parameter.name} name={parameter.name}></input></p>
+            case 'int':
+                return <p><label htmlFor={parameter.name}>{parameter.name}</label> <input type="number" id={parameter.name} name={parameter.name} onChange={handleNumberParameterChange}></input></p>
             case 'Colour':
                 return <p><label htmlFor={parameter.name}>{parameter.name}</label> <input type="color" id={parameter.name} name={parameter.name} onChange={handleColorParameterChange}></input></p>
         }

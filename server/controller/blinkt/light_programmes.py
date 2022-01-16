@@ -17,6 +17,6 @@ def perform_blink_random_colour():
 def perform_walk_through_pixels(colour: Colour):
     walk_through_pixels_with(colour.red, colour.green, colour.blue)
 
-def perform_radiate_colour(colour: Colour):
+def perform_radiate_colour(colour: Colour, granularity: int):
     set_all_pixels_to_rgb(colour.red, colour.green, colour.blue)
-    radiate_pixel_brightness()
+    radiate_pixel_brightness(granularity)

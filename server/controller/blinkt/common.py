@@ -57,9 +57,8 @@ def adjust_colour_intensity(colour_intensity, adjust_coluur_intensity_by_maximum
     else:
         return new_colour_intensity
 
-def radiate_pixel_brightness():
+def radiate_pixel_brightness(granularity: int):
     while (True):
-        granularity = 100
         sleep_time = 0.01
         for i in range(0, granularity):
             set_brightness(i/granularity)
