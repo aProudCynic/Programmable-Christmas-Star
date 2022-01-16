@@ -6,6 +6,9 @@ from time import sleep
 
 class LightController:
 
+    def __init__(self):
+        self.process = None
+
     def start_loop(self, function, parameters) -> None:
         self.process = Process(target=self.perform_loop, args=(function, parameters))
         self.process.start()
@@ -14,8 +17,8 @@ class LightController:
         self.start_loop(function, parameters)
         time_to_live_secs = 10
         if time_to_live_secs > 0:
-            self.countdown = Thread(target=self.perform_countdown, args=(time_to_live_secs,))
-            self.countdown.start()
+            countdown = Thread(target=self.perform_countdown, args=(time_to_live_secs,))
+            countdown.start()
 
     def perform_loop(self, function, parameters) -> None:
         while True:
