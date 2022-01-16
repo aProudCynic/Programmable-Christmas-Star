@@ -14,7 +14,7 @@ class LightController:
             self.apply_light_programme(function, parameters)
 
     def stop_loop(self) -> None:
-        if self.process and self.process.is_alive():
+        if self.is_on():
             self.process.terminate()
 
     def get_light_programmes(self):
@@ -30,6 +30,9 @@ class LightController:
 
     def apply_light_programme(self, function, parameters) -> None:
         pass
+
+    def is_on(self):
+        return hasattr(self, 'process') and self.process and self.process.is_alive()
 
     def __not_imported_functions_from(self, module):
         function_tuples = getmembers(module, isfunction)
