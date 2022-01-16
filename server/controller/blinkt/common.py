@@ -64,11 +64,9 @@ def radiate_pixel_brightness():
         for i in range(0, granularity):
             set_brightness(i/granularity)
             show()
-            print(i)
             sleep(sleep_time)
         for i in range(granularity, 0, -1):
             set_brightness(i/granularity)
-            print(i)
             show()
             sleep(sleep_time)
 
