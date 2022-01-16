@@ -35,7 +35,7 @@ logger = logging.getLogger(__name__)
 
 @app.post("/start/walk_through_pixels")
 async def walk_through_pixels(parameters: WalkThroughPixelsParameters):
-    light_controller.start_loop(perform_walk_through_pixels, *vars(parameters).values())
+    light_controller.start_loop(perform_walk_through_pixels, parameters)
 
 @app.post("/start/blink_random_colour")
 async def blink_random_colour():
@@ -43,7 +43,7 @@ async def blink_random_colour():
 
 @app.post("/start/radiate_colour")
 async def radiate_colour(parameters: RadiateColourParameters):
-    light_controller.start_loop(perform_radiate_colour, *vars(parameters).values())
+    light_controller.start_loop(perform_radiate_colour, parameters)
 
 
 @app.post("/stop")
