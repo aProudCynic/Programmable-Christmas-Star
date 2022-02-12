@@ -1,10 +1,17 @@
 import React from 'react';
 
-interface StartedContextProps {
-  isStarted: boolean;
-  flipStarted: Function;
+interface IsOnContextProps {
+  isOn: boolean;
+  flipIsOn: Function;
+  setOn: Function;
+  setOff: Function;
 }
 
-const StartedContext = React.createContext<StartedContextProps>({isStarted: false, flipStarted: () => {}});
+const IsOnContext = React.createContext<IsOnContextProps>({
+  isOn: false,
+  flipIsOn: () => {},
+  setOn: () => {},
+  setOff: () => {},
+});
 
-export default StartedContext;
+export default IsOnContext;

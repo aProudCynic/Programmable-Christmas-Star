@@ -3,19 +3,19 @@ import './App.css';
 import IsOn from './is_on/IsOn';
 import Select from './select/Select';
 import Stop from './stop/Stop';
-import StartedContext from './store/started-context';
+import IsOnContext from './store/started-context';
 
 function App() {
 
-  const [started, setStarted] = useState(false);
+  const [isOn, setIsOn] = useState(false);
   
   return (
     <div className="App">
-      <StartedContext.Provider value={{isStarted: started, flipStarted: () => setStarted(!started)}}>
+      <IsOnContext.Provider value={{isOn: isOn, flipIsOn: () => setIsOn(!isOn), setOn: () => setIsOn(true), setOff: () => setIsOn(false)}}>
         <IsOn></IsOn>
         <Stop></Stop>
         <Select></Select>
-      </StartedContext.Provider>
+      </IsOnContext.Provider>
     </div>
   );
 }

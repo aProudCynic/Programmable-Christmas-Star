@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { SERVER_URL } from '../constants';
-import StartedContext from '../store/started-context';
+import IsOnContext from '../store/started-context';
 
 class Colour {
     red: number;
@@ -35,7 +35,7 @@ interface ParameterDescriptor {
 
 function Select() {
 
-    const startedContext = useContext(StartedContext);
+    const startedContext = useContext(IsOnContext);
 
     const [lightProgrammes, setLightProgrammes] = useState<LightProgramme[]>([]);
     const [selectedLightProgramme, setSelectedLightProgramme] = useState<LightProgramme | undefined>(undefined);
@@ -92,7 +92,7 @@ function Select() {
                 `${SERVER_URL}/start/${selectedLightProgramme.name}`, requestProperties
             );
             if (result.ok) {
-                startedContext.flipStarted();
+                startedContext.flipIsOn();
             }
         }
     };
@@ -134,13 +134,13 @@ function Select() {
 
     return (
         <div className="Select">
-            <select name="ligthProgramme" id="ligthProgramme" onChange={handleChange} disabled={startedContext.isStarted}>
+            <select name="ligthProgramme" id="ligthProgramme" onChange={handleChange} disabled={startedContext.isOn}>
                 {lightProgrammes.map(lightProgramme => <option value={lightProgramme.name}>{lightProgramme.name}</option>)}
             </select>
             {selectedLightProgramme && selectedLightProgramme.parameters ? selectedLightProgramme.parameters.map(
                 parameter => mapParameterDescriptorToHtmlElement(parameter)
             ) : null}
-            <input type="button" value="Loop" onClick={loopLightProgramme} disabled={startedContext.isStarted} />
+            <input type="button" value="Loop" onClick={loopLightProgramme} disabled={startedContext.isOn} />
         </div>
     );
 }
