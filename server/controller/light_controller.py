@@ -14,8 +14,9 @@ class LightController:
         self.process.start()
 
     def start_loop_with_ttl(self, function, parameters) -> None:
+        time_to_live_secs = parameters.time_to_live
+        delattr(parameters, 'time_to_live')
         self.start_loop(function, parameters)
-        time_to_live_secs = 10
         if time_to_live_secs > 0:
             countdown = Thread(target=self.perform_countdown, args=(time_to_live_secs,))
             countdown.start()
