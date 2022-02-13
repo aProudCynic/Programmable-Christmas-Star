@@ -13,6 +13,7 @@ from controller.blinkt.light_programmes import (
 from model.request_parameters import (
     WalkThroughPixelsParameters,
     RadiateColourParameters,
+    BlinkRandomColoursParameters,
 )
 
 app = FastAPI()
@@ -38,8 +39,8 @@ async def walk_through_pixels(parameters: WalkThroughPixelsParameters):
     light_controller.start_loop_with_ttl(perform_walk_through_pixels, parameters)
 
 @app.post("/start/blink_random_colour")
-async def blink_random_colour():
-    light_controller.start_loop_with_ttl(perform_blink_random_colour, None)
+async def blink_random_colour(parameters: BlinkRandomColoursParameters):
+    light_controller.start_loop_with_ttl(perform_blink_random_colour, parameters)
 
 @app.post("/start/radiate_colour")
 async def radiate_colour(parameters: RadiateColourParameters):

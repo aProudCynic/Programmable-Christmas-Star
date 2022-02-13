@@ -5,6 +5,9 @@ from model.colour import Colour
 class LightProgrammeWithTimeToLive(BaseModel):
     time_to_live: int
 
+class BlinkRandomColoursParameters(LightProgrammeWithTimeToLive):
+    pass
+
 class WalkThroughPixelsParameters(LightProgrammeWithTimeToLive):
     colour: Colour
 
