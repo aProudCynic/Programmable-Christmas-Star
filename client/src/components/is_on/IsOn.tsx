@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { SERVER_URL } from '../constants';
-import IsOnContext from '../store/started-context';
+import { SERVER_URL } from '../../constants';
+import IsOnContext from '../../store/started-context';
 
 function IsOn() {
 

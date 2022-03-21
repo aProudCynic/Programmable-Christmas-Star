@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { SERVER_URL } from '../constants';
-import IsOnContext from '../store/started-context';
+import { SERVER_URL } from '../../constants';
+import IsOnContext from '../../store/started-context';
 
 class Colour {
     red: number;

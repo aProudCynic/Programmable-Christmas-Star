@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
-import IsOn from './is_on/IsOn';
-import Select from './select/Select';
-import Stop from './stop/Stop';
+import IsOn from './components/is_on/IsOn';
+import Select from './components/select/Select';
+import Stop from './components/stop/Stop';
 import IsOnContext from './store/started-context';
 
 function App() {
