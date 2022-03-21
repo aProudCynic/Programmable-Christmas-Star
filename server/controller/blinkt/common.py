@@ -16,6 +16,14 @@ def reset():
     set_brightness(1)
     clear()
 
+def set_pixel_to_colour(i, rgb_color):
+    red = rgb_color.red
+    green = rgb_color.green
+    blue = rgb_color.blue
+    print(i, red, green, blue)
+    set_pixel(i, red, green, blue)
+    show()
+
 def set_all_pixels_to_color(rgb_color):
     red, green, blue = rgb_color
     set_all_pixels_to_rgb(red, green, blue)
