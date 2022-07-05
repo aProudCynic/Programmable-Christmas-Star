@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { SERVER_URL } from '../../constants';
 import IsOnContext from '../../store/started-context';
+import Timer from '../timer/Timer';
 
 function IsOn() {
 
@@ -20,6 +21,7 @@ function IsOn() {
     <div>
       <p><input type="button" value="On?" onClick={checkIsOn} /> {startedContext.isOn ? 'yes' : 'no' }</p>
       <p>last checked: {lastChecked ? lastChecked : 'never'}</p>
+      <p><Timer /></p>
     </div>
   );
 }
