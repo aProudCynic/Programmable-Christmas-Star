@@ -1,4 +1,5 @@
 from inspect import getmembers, isfunction
+import logging
 from multiprocessing import Process
 from threading import Thread
 from time import sleep
@@ -8,10 +9,13 @@ class LightController:
 
     def __init__(self):
         self.process = None
+        logging.basicConfig(filename='light_controller.log', encoding='utf-8', level=logging.DEBUG)
 
     def start_loop(self, function, parameters) -> None:
+        logging.debug(f'starting loop, replacing process {self.process}')
         self.process = Process(target=self.perform_loop, args=(function, parameters))
         self.process.start()
+        logging.debug(f'started loop as process {self.process}')
 
     def start_loop_with_ttl(self, function, parameters) -> None:
         time_to_live_secs = parameters.time_to_live
@@ -26,8 +30,10 @@ class LightController:
             self.apply_light_programme(function, parameters)
 
     def stop_loop(self) -> None:
+        logging.debug('stopping loop')
         if self.is_on():
             self.process.terminate()
+            logging.debug(f'stopped loop as process {self.process}')
 
     def get_light_programmes(self):
         return self.__not_imported_functions_from(
@@ -47,7 +53,9 @@ class LightController:
         return hasattr(self, 'process') and self.process and self.process.is_alive()
 
     def perform_countdown(self, seconds):
+        logging.debug(f'starting countdown from {seconds}')
         sleep(seconds)
+        logging.debug('initiating loop stop')
         self.stop_loop()
 
     def __not_imported_functions_from(self, module):
