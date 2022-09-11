@@ -3,6 +3,7 @@ import './App.css';
 import IsOn from './components/is_on/IsOn';
 import Select from './components/select/Select';
 import Stop from './components/stop/Stop';
+import Favourites from './components/favourites/Favourites';
 import IsOnContext from './store/started-context';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <IsOn></IsOn>
         <Stop></Stop>
         <Select></Select>
+        <Favourites></Favourites>
       </IsOnContext.Provider>
     </div>
   );
