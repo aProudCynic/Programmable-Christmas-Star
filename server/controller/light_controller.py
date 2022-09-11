@@ -34,6 +34,7 @@ class LightController:
         if self.is_on():
             self.process.terminate()
             logging.debug(f'stopped loop as process {self.process}')
+            set_all_pixels_to_rgb(0, 0, 0)
 
     def get_light_programmes(self):
         return self.__not_imported_functions_from(
