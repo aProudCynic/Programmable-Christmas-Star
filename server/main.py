@@ -61,9 +61,9 @@ def stop_light_programme():
 def get_light_programmes():
     return __extract_light_programmes()
 
-@app.get("/is_on")
+@app.get("/status")
 def is_on():
-    return light_controller.is_on()
+    return {'process_start_date': light_controller.process_start_date()}
 
 def __extract_light_programmes():
     light_programmes = [

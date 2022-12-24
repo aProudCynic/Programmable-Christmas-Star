@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { SERVER_URL } from '../../constants';
-import IsOnContext from '../../store/started-context';
+import StatusContext from '../../store/status-context';
 
 function Stop() {
 
-  const startedContext = useContext(IsOnContext);
+  const startedContext = useContext(StatusContext);
 
   const stop = async () => {
     const result = await fetch(`${SERVER_URL}/stop`, { method: 'POST' })

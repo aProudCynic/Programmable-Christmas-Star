@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { SERVER_URL } from '../../constants';
-import IsOnContext from '../../store/started-context';
+import StatusContext from '../../store/status-context';
 import Timer from '../timer/Timer';
 
-function IsOn() {
+function Status() {
 
-  const startedContext = useContext(IsOnContext);
+  const statusContext = useContext(StatusContext);
   const [lastChecked, setLastChecked] = useState<Date | null>(null);
 
   const checkIsOn = async () => {
@@ -13,7 +13,7 @@ function IsOn() {
     if (result.ok) {
         const isOn = await result.json();
         console.log(isOn);
-        isOn ? startedContext.setOn() : startedContext.setOff();
+        isOn ? statusContext.setOn() : statusContext.setOff();
       }
   }
 
@@ -26,4 +26,4 @@ function IsOn() {
   );
 }
 
-export default IsOn;
+export default Status;

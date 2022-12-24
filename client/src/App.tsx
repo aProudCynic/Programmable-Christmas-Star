@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './App.css';
-import IsOn from './components/is_on/IsOn';
+import Status from './components/status/Status';
 import Select from './components/select/Select';
 import Stop from './components/stop/Stop';
 import Favourites from './components/favourites/Favourites';
-import IsOnContext from './store/started-context';
+import StatusContext from './store/status-context';
 
 function App() {
 
@@ -12,12 +12,12 @@ function App() {
   
   return (
     <div className="App">
-      <IsOnContext.Provider value={{isOn: isOn, flipIsOn: () => setIsOn(!isOn), setOn: () => setIsOn(true), setOff: () => setIsOn(false)}}>
-        <IsOn></IsOn>
+      <StatusContext.Provider value={{isOn: isOn, flipIsOn: () => setIsOn(!isOn), setOn: () => setIsOn(true), setOff: () => setIsOn(false)}}>
+        <Status></Status>
         <Stop></Stop>
         <Select></Select>
         <Favourites></Favourites>
-      </IsOnContext.Provider>
+      </StatusContext.Provider>
     </div>
   );
 }

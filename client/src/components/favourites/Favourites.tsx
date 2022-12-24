@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { SERVER_URL } from '../../constants';
-import IsOnContext from '../../store/started-context';
+import StatusContext from '../../store/status-context';
 import { Colour } from '../../model/colour';
 
 function Favourites() {
 
-    const startedContext = useContext(IsOnContext);
+    const startedContext = useContext(StatusContext);
 
     const initiatePurplePulse = async () => {
         const requestProperties: any = {

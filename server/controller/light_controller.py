@@ -1,21 +1,26 @@
+from datetime import datetime
 from inspect import getmembers, isfunction
 import logging
 from multiprocessing import Process
 from threading import Thread
 from time import sleep
 
+from server.controller.blinkt.common import set_all_pixels_to_rgb
+
 
 class LightController:
 
     def __init__(self):
         self.process = None
+        self.process_start_date = None
         logging.basicConfig(filename='light_controller.log', encoding='utf-8', level=logging.DEBUG)
 
     def start_loop(self, function, parameters) -> None:
         logging.debug(f'starting loop, replacing process {self.process}')
         self.process = Process(target=self.perform_loop, args=(function, parameters))
         self.process.start()
-        logging.debug(f'started loop as process {self.process}')
+        self.process_start_date = datetime.now()
+        logging.debug(f'started loop as process {self.process} at {self.process_start_date}')
 
     def start_loop_with_ttl(self, function, parameters) -> None:
         time_to_live_secs = parameters.time_to_live

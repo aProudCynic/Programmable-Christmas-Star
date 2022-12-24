@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { SERVER_URL } from '../../constants';
-import IsOnContext from '../../store/started-context';
+import StatusContext from '../../store/status-context';
 import { Colour } from '../../model/colour';
 
 interface LightProgramme {
@@ -15,7 +15,7 @@ interface ParameterDescriptor {
 
 function Select() {
 
-    const startedContext = useContext(IsOnContext);
+    const startedContext = useContext(StatusContext);
 
     const [lightProgrammes, setLightProgrammes] = useState<LightProgramme[]>([]);
     const [selectedLightProgramme, setSelectedLightProgramme] = useState<LightProgramme | undefined>(undefined);

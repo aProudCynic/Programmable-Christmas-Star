@@ -1,17 +1,17 @@
 import React from 'react';
 
-interface IsOnContextProps {
+interface StatusContextProps {
   isOn: boolean;
   flipIsOn: Function;
   setOn: Function;
   setOff: Function;
 }
 
-const IsOnContext = React.createContext<IsOnContextProps>({
+const StatusContext = React.createContext<StatusContextProps>({
   isOn: false,
   flipIsOn: () => {},
   setOn: () => {},
   setOff: () => {},
 });
 
-export default IsOnContext;
+export default StatusContext;
